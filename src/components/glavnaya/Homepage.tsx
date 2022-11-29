@@ -1,6 +1,7 @@
 import "./Homepage.css";
-import React, {useState} from "react";
+import React, {useEffect, useState,useMemo} from "react";
 import innerText from 'react-innertext';
+import { ThunkDispatch } from 'redux-thunk'
 import {Link} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -12,106 +13,66 @@ import img5 from "./img/footer/7.svg";
 import img6 from "./img/footer/9.svg"
 import img7 from "./img/footer/10.svg"
 import img8 from "./img/footer/11.svg"
+import click from "./Homepagejs"
 import arrowbtm from "./img/footer/arrowbottom.svg"
-
-export default function Homepage  (){
-  const[info,setInfo]=useState(true);
- 
-
-  const click = () =>{
-    
-   document.querySelectorAll(".dropdown").forEach(function(dropdownWrapper){
-    const listitemclick=dropdownWrapper.querySelectorAll(".dropdown__item");
-    const btn = dropdownWrapper.querySelector(".Spisok");
-    const btnclick = dropdownWrapper.querySelector(".Spisok__dropdown");
-    const input =  dropdownWrapper.querySelector(".drodown__item__hiden");
-
-      btnclick.classList.toggle("Spisok__dropdown__visible");
-
-    // btnclick.classList.toggle("Spisok__dropdown__visible");
-    
-    listitemclick.forEach(function(listitem){
-      listitem.addEventListener("click",(e)=>{
-        e.stopPropagation();
-        btn.innerText=listitem.innerText ;
-        btnclick.classList.remove("Spisok__dropdown__visible");
-        input.value=listitem.dataset.value;
-      })
-    })
+import axios from "../../axios";
+import ArendaRoom from "./ArendaRoom";
+import { Col,Row } from "react-bootstrap"
+import { ReducerState, Action } from './interfaces'
+import { render } from "react-dom";
+import {Slider} from "react-slick"
+import "slick-carousel/slick/slick.css";
 
 
-    document.addEventListener('click',(e)=>{
-      if(e.target !== btn){
-        btnclick.classList.remove("Spisok__dropdown__visible");
-      }
-    })
-
-  })
+const PAGE_LIMIT = 3;
 
 
-      
- 
-   
+
+
+export default function Homepage(){
+  const arrow__left=document.querySelector(".arrow__left");
+  const arrow__right=document.querySelector(".arrow__right");
+  const slider=document.querySelector(".cards ")
+  const index=1;
+  const [ToggleState,setToggleState] = useState(1);
+  const toggleTab = (index) =>{
+    setToggleState(index)
+  }
+  
+  const next = ()=>{
+    console.log(slider)
   }
 
-  const click2=()=>{
-    document.querySelectorAll(".all").forEach(function (selectitem){
-
-      const selector = document.querySelector(".selector");
-      const select_filter = document.querySelector(".select__filter");
-      selectitem.querySelectorAll(".select__item").forEach(function(sectry){
-        sectry.removeEventListener("click",()=>{
-          selector.classList.toggle("selector__start");
-          select_filter.classList.toggle("select__filter__visible");
-          sectry.classList.toggle("select__item__visible");
-          console.log(sectry);
-        })
-       
-      });
-
   
-
- 
-
-      // select__item.forEach(function(listitem){
-      //   listitem.addEventListener("click",(e)=>{
-      //     selector.classList.remove("Spisok__dropdown__visible");
-      //   })
-      // })
-
-      })
-     
-      // })    
-
-
-  }
-   
-
-   
-  
-  
-
   return(
     <>
-    <Header/>
+    <Header></Header>
       <section className="first">
         <div className="conteiner">
           <div className="first__block">
             <div className="block__item">
-              <h1 className="innerText">Sdaem.by - у нас живут <font color="#FFD54F">ваши объявления</font></h1>
-              <div className="all">
-                <div className="selector" >
-                    <p className="select__item" onClick={click2}>Квартиры на сутки</p>
-                    <p className="select__item" onClick={click2}>Котеджи и усадьбы</p>
-                    <p className="select__item"onClick={click2}>Бани и сауны</p>
-                    <p className="select__item"onClick={click2}>Авто напрокат</p>   
+              <h1 className="innerText">Sdaem.by - у нас живут <span style = {{color:"#FFD54F"}} > ваши объявления</span></h1>
+              <div className="all" >
+                <div className="block__tabs">
+                    <div className={ToggleState === 1 ? "tabs tabs__active":"tabs"} onClick={()=>toggleTab(1)} >
+                      <p className="select__item" >Квартиры на сутки</p>
+                    </div>
+                    <div className={ToggleState === 2 ? "tabs tabs__active":"tabs"} onClick={()=>toggleTab(2)}>
+                      <p className="select__item" >Котеджи и усадьбы</p>
+                    </div>
+                    <div className={ToggleState === 3 ? "tabs tabs__active":"tabs"} onClick={()=>toggleTab(3)}>
+                      <p className="select__item">Бани и сауны</p>
+                    </div>
+                    <div className={ToggleState === 4 ? "tabs tabs__active":"tabs"} onClick={()=>toggleTab(4)}>
+                      <p className="select__item">Авто напрокат</p>   
+                    </div>
                 </div>
               </div>
               <div className="select__filter">
                 <div className="select__filter__item">
                   <p className="select__filter__item__css">Город</p>
                     <div className="dropdown">
-                      <button className="Spisok" onClick={click}>Выберите</button>
+                      <button className="Spisok" onClick={click} >Выберите</button >
                       <ul className="Spisok__dropdown">
                         <li className="dropdown__item" data-value="1">Минск</li>
                         <li className="dropdown__item" data-value="2">Город 2</li>
@@ -308,31 +269,53 @@ export default function Homepage  (){
       
     {/* section 3 */}
 
-      <section className="third">
+      <section className="third" style={{height:"970px",
+                                 marginBottom:"90px"}}>
         <div className="third__block">
           <img src={img5} alt="" />
           <div className="conteiner"></div>
         </div>
         <div className="third__block">
           <div className="conteiner">
+            <div className="card__list">
+              <div className="Card">
+                  <div className="ColRowHome conteiner" style={{position:"absolute",
+                                                      marginTop:"7%"}}>
+                    <div className="cards" style={{display:"flex",justifyContent:"space-between"}}>
+                      <Row>
+                        <Col>
+                          <ArendaRoom>{"/ArendaCard"}</ArendaRoom>
+                        </Col>
+                      </Row>
+                    </div>
+                   
+                    <div className="predlojenia">
+                      <div className="chislo__predlojenie">
+                        <h1 className="kol-vo__predlojeniy">321 <span style ={{color:"#664EF9"}}>+</span></h1>
+                        <p className="dopkol-vo__predlojeniy">Предложений по Минску</p>
+                      </div>
+                      <div className="btn__predlojenie">
+                        <button className="btndob btnpredl">Посмотреть все</button>
+                      </div>
+                    </div>
+                  
+                  </div>
+    
+
+              
+              </div>
+               
+            </div>
             <div className="delenie__third__block">
               <div className="pervoe__delenie__third__block">
                 <p className="info__pervogo__delenia">Квартиры на сутки</p>
                 <h1 className="dopinfo__pervogo__delenia">Аренда квартир в Минске</h1>
-                <div className="predlojenia">
-                  <div className="chislo__predlojenie">
-                    <h1 className="kol-vo__predlojeniy">321 <font color="#664EF9">+</font></h1>
-                    <p className="dopkol-vo__predlojeniy">Предложений по Минску</p>
-                  </div>
-                  <div className="btn__predlojenie">
-                    <button className="btndob btnpredl">Посмотреть все</button>
-                  </div>
-                </div>
+               
               </div>
               <div className="vtoroe__delenie__third__block">
                 <div className="select_metro">
                       <div className="dropdown">
-                        <button className="Spisok" onClick={click}>Выберите</button>
+                        <button className="Spisok spisokmetro" onClick={click}>Выберите</button>
                         <ul className="Spisok__dropdown">
                           <li className="dropdown__item" data-value="1">Минск</li>
                           <li className="dropdown__item" data-value="2">Город 2</li>
@@ -343,7 +326,7 @@ export default function Homepage  (){
                         <input type="text" name="select__category" value="" className="drodown__item__hiden" />
                       </div>
                       <div className="dropdown">
-                        <button className="Spisok" onClick={click}>Выберите</button>
+                        <button className="Spisok spisokmetro" onClick={click}>Выберите</button>
                         <ul className="Spisok__dropdown">
                           <li className="dropdown__item" data-value="1">Минск</li>
                           <li className="dropdown__item" data-value="2">Город 2</li>
@@ -354,14 +337,7 @@ export default function Homepage  (){
                         <input type="text" name="select__category" value="" className="drodown__item__hiden" />
                       </div>
                 </div>
-                <button className="arrow__left"> <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 1.12305L1.42857 7.69448L8 14.2659" stroke="#664EF9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                </button>
-                <button className="arrow__right"> <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 14.2656L7.57143 7.6942L0.999999 1.12277" stroke="#664EF9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                </button>
+              
 
               </div>
             </div>
