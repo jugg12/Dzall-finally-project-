@@ -171,7 +171,7 @@ html,body{
 .Voyti{
   background: #FFD54F;
   border-radius: 33px;
-  padding: 12px 159px;
+  padding: 12px 128px;
   border: 0;
   font-weight: 700;
   font-size: 16px;
@@ -297,6 +297,67 @@ html,body{
   fill:#686868;
 }
 
+/* errors */
+
+.login__error{
+  outline: none;
+  transition: .2s linear outline;
+  width: 80%;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  padding: 15px 20px 15px 55px;
+  transition: .2s border linear;
+  border: 1px solid #EB5757
+}
+
+.password__error{
+  outline: none;
+  width: 80%;
+  border-radius: 30px;
+  padding: 15px 20px 15px 55px;
+  border: 1px solid #EB5757;
+  transition: .1s border linear;
+}
+
+.password__error:focus{
+  border: 1px solid #EB5757;
+}
+
+.login__error:focus{
+  border: 1px solid #EB5757;
+}
 
 
+.icon__error{
+  visibility: visible;
+  position: absolute;
+  right: 43%;
+  margin-top: 13.5px;
+}
 
+.iconHidden{
+  visibility: hidden;
+  position: absolute;
+}
+
+.OshibkaVvoda{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 9.5px 0px;
+  background: #EB5757;
+  border-radius: 33px;
+  display: none;
+}
+
+.OshibkaVvoda.fix{
+  display: flex;
+}
+
+.OshibkaVvodaText{
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
+}

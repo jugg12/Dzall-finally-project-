@@ -1,27 +1,24 @@
 import React, {memo, useCallback,useState,useEffect,useRef} from "react";
-import "./ArendaRoom.css";
 import axios from "../../axios";
-import isEqual from 'lodash/isEqual';
 import { Card,Button } from "react-bootstrap";
 import {useHistory} from "react-router-dom";
-import { ArendaCardProtuct, CartItem,Action} from "./interfaces";
 import Slider from "react-slick";
-import 'react-loading-skeleton/dist/skeleton.css';
-import CardSkeleton from "./CardSkeleton";
 import btnclick from "./clickbtnkontakti";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import CardSkeleton from "./CardSkeleton";
 
 
 const ArendaRoom=(link)=>{
   const sliderRef = useRef<any>(null);
+  console.log(sliderRef.current);
+  const [Loading,setLoading]=useState(true);
   const history=useHistory();
-  const [Loading,setLoading]=useState(true)
  
 
   const settings = {
-    infinite: true,
-    swipe:false,
+    Infinity:true,
+    autoplay:true,
+    autoplaySpeed:0,
+    swipe:true,
     speed: 2500,
     arrows:false,
     slidesToShow: 3,
@@ -29,39 +26,27 @@ const ArendaRoom=(link)=>{
       initialSlide: true,
        
     }
-
-    const settings2 = {
-      infinite: true,
-      swipe:false,
-      speed: 2500,
-      arrows:true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      initialSlide: true, 
-      }
     
     const push = (item,city2) =>{
+      console.log(item)
       history.push(`/katalog/city=${city2}/${item}`)
     }
-
+      
+  
   const [Arenda,setArenda]=useState<any>([]);
-
   useEffect(()=>{
-    
     axios.get(link.children).then(({data})=>{
       setArenda(data);
-      setLoading(false);
-   })
-  },[]);
-
-
+    })
+  },[])
+    
   return(
     <div className="slider-wrapper">
-    <Slider {...settings} ref={sliderRef} className="Slider">
+    <Slider {...settings} ref={sliderRef} className="Slider" >
       {
-      Arenda.map((item)=> (Loading?<CardSkeleton />:(
+      Arenda.map((item)=>Loading?<CardSkeleton />:(
       <Card key={item.id} className="card__style" style={{width:"406px",height:"535px"}}>
-        <div className={"SpisokInformKontakti"}>
+        <div className="SpisokInformKontakti">  
           <div className="CardOsnova">
             <div className="Gold">
               <svg width="66" height="38" viewBox="0 0 66 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,8 +55,8 @@ const ArendaRoom=(link)=>{
               <path d="M21.8182 17.6211H24.6307C24.2727 15.0323 21.9908 13.2106 19.0312 13.2106C15.5732 13.2106 12.9077 15.7035 12.9077 19.9478C12.9077 24.0898 15.4006 26.6594 19.0888 26.6594C22.3935 26.6594 24.7521 24.5692 24.7521 21.1239V19.4748H19.2741V21.5586H22.0866C22.0483 23.1822 20.9425 24.2113 19.1016 24.2113C17.0241 24.2113 15.7138 22.658 15.7138 19.9222C15.7138 17.1992 17.0753 15.6587 19.076 15.6587C20.5014 15.6587 21.4666 16.3938 21.8182 17.6211ZM31.2161 26.6722C34.1948 26.6722 36.0485 24.6332 36.0485 21.6097C36.0485 18.5671 34.1948 16.5344 31.2161 16.5344C28.2374 16.5344 26.3837 18.5671 26.3837 21.6097C26.3837 24.6332 28.2374 26.6722 31.2161 26.6722ZM31.2289 24.5629C29.8546 24.5629 29.1515 23.3036 29.1515 21.5906C29.1515 19.8775 29.8546 18.6119 31.2289 18.6119C32.5776 18.6119 33.2807 19.8775 33.2807 21.5906C33.2807 23.3036 32.5776 24.5629 31.2289 24.5629ZM40.5421 13.3896H37.8191V26.4805H40.5421V13.3896ZM46.3413 26.6403C47.9265 26.6403 48.7511 25.7262 49.1282 24.908H49.2433V26.4805H51.9279V13.3896H49.2113V18.3114H49.1282C48.7638 17.5124 47.9776 16.5344 46.3349 16.5344C44.1808 16.5344 42.359 18.2092 42.359 21.5842C42.359 24.8697 44.104 26.6403 46.3413 26.6403ZM47.2042 24.4734C45.8683 24.4734 45.1396 23.2844 45.1396 21.5714C45.1396 19.8711 45.8555 18.7013 47.2042 18.7013C48.5273 18.7013 49.2688 19.82 49.2688 21.5714C49.2688 23.3228 48.5146 24.4734 47.2042 24.4734Z" fill="white"/>
               </g>
               <defs>
-              <filter id="filter0_d_2831_1891" x="12.9072" y="13.2109" width="39.0205" height="14.4609" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-              <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+              <filter id="filter0_d_2831_1891" x="12.9072" y="13.2109" width="39.0205" height="14.4609" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
               <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
               <feOffset dy="1"/>
               <feColorMatrix type="matrix" values="0 0 0 0 0.575 0 0 0 0 0.3105 0 0 0 0 0 0 0 0 0.3 0"/>
@@ -79,14 +64,14 @@ const ArendaRoom=(link)=>{
               <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2831_1891" result="shape"/>
               </filter>
               <linearGradient id="paint0_linear_2831_1891" x1="-6.06526e-07" y1="2.83047" x2="65.138" y2="36.2767" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#FFD54F"/>
-              <stop offset="1" stopColor="#FEC100"/>
+              <stop stop-color="#FFD54F"/>
+              <stop offset="1" stop-color="#FEC100"/>
               </linearGradient>
               </defs>
               </svg>
-            </div>     
-          <Card.Img variant="top" className="imgCard" src={item.url}/>
-            <Card.Body className="bodyCard">
+            </div>
+              <Card.Img variant="top" className="imgCard" src={item.url}/>
+            <Card.Body className="bodyCard" >
               <Card.Title className="card__title">
                 <div className="perviytitle">
                   <div className="stoimostobshaya">
@@ -132,6 +117,7 @@ const ArendaRoom=(link)=>{
                       <div className="rayon">{item.rayon}</div>
                     </div>
                   </div>
+
                 </div>
               </Card.Title>
               <Card.Text className="card__text">
@@ -139,15 +125,15 @@ const ArendaRoom=(link)=>{
               </Card.Text> 
                 <div className="btnkontaktiOsnova">
                   <div className="dropdownKontakti">
-                    <button className={`kontaktibtn`} id={item.id} onClick={()=>btnclick(item.id)}>
-                        <div className="btnall" >
-                          <div className="btniconkontakti">
-                            <svg className="telbtnicon" width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M7.18253 0.349609H1.72797C0.787063 0.349609 0.0234375 1.11324 0.0234375 2.05415L0.0234375 13.6451C0.0234375 14.586 0.787063 15.3496 1.72797 15.3496H7.18253C8.12344 15.3496 8.88707 14.586 8.88707 13.6451V2.05415C8.88707 1.11324 8.12344 0.349609 7.18253 0.349609ZM4.45527 14.6678C3.88935 14.6678 3.43254 14.211 3.43254 13.6451C3.43254 13.0792 3.88935 12.6223 4.45527 12.6223C5.02119 12.6223 5.478 13.0792 5.478 13.6451C5.478 14.211 5.02116 14.6678 4.45527 14.6678ZM7.52345 11.9405H1.38709V2.39507H7.52345V11.9405Z" fill="#664EF9"/>
-                            </svg>
-                          </div>
-                          <p className="textkontakti">Контакты</p>    
-                        </div> 
+                    <button className={`kontaktibtn`} id={item.id} onClick={()=> btnclick(item.id)}>
+                      <div className="btnall">
+                        <div className="btniconkontakti">
+                          <svg className="telbtnicon" width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.18253 0.349609H1.72797C0.787063 0.349609 0.0234375 1.11324 0.0234375 2.05415L0.0234375 13.6451C0.0234375 14.586 0.787063 15.3496 1.72797 15.3496H7.18253C8.12344 15.3496 8.88707 14.586 8.88707 13.6451V2.05415C8.88707 1.11324 8.12344 0.349609 7.18253 0.349609ZM4.45527 14.6678C3.88935 14.6678 3.43254 14.211 3.43254 13.6451C3.43254 13.0792 3.88935 12.6223 4.45527 12.6223C5.02119 12.6223 5.478 13.0792 5.478 13.6451C5.478 14.211 5.02116 14.6678 4.45527 14.6678ZM7.52345 11.9405H1.38709V2.39507H7.52345V11.9405Z" fill="#664EF9"/>
+                          </svg>
+                        </div>
+                        <p className="textkontakti">Контакты</p>    
+                      </div> 
                     </button>
                     <div className="informkontakti" id={item.id}>
                       <img src={item.imageVladelec} className="circleIcon" alt="" />
@@ -186,12 +172,11 @@ const ArendaRoom=(link)=>{
                         </svg>
                         </a>
                       </div>
-                    </div>  
-
+                    </div>    
                   </div>
                 <Button variant="primary" className="Podrobneebtn">
                 <div className="Podrobnee">
-                    <p className="textPodrobnee" onClick={(e)=>push(item.id,item.city2)}>Подробнее</p>
+                    <p className="textPodrobnee" onClick={(e)=>{push(item.id,item.city2);window.location.reload();}}>Подробнее</p>
                 </div>
                 </Button>
               </div>
@@ -199,19 +184,9 @@ const ArendaRoom=(link)=>{
             </div>
           </div>
       </Card> 
-    )))
+    ))
       }
     </Slider>
-    <div className="btnsarrows" style={{textAlign:"center",position: "absolute", left: "48.5%", zIndex: "2"}}>
-        <button className="arrow__left" onClick={()=>sliderRef.current.slickPrev()} style={{marginRight:"13px"}}> <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 1.12305L1.42857 7.69448L8 14.2659" stroke="#664EF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        </button>
-        <button className="arrow__right" onClick={()=>sliderRef.current.slickNext()}> <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 14.2656L7.57143 7.6942L0.999999 1.12277" stroke="#664EF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        </button>
-      </div>
     </div>
     
   )

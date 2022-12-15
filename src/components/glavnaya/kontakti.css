@@ -168,6 +168,7 @@
 
 .Voyti.otpravit{
   margin-bottom: 0;
+  transition: .15s background linear;
 }
 
 .otpravkabtn{
@@ -177,6 +178,7 @@
 
 .Voyti.otpravit:hover{
   background: #4126f3;
+  transition: .15s background linear;
 }
 
 /* tretie delenie */
@@ -189,10 +191,30 @@
 
 .kontakti__socseti{
   margin-left: 15px;
+  cursor: pointer;
+}
+
+.kontakti__socseti__hover{
+  transition: .1s fill-opacity linear;
+}
+
+.kontakti__socseti:hover .kontakti__socseti__hover{
+  fill-opacity: .3;
+  transition: .1s fill-opacity linear;
 }
 
 .kontakti__socseti2{
   margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.kontakti__socseti2 .kontakti__socseti2__hover{
+  transition: .1s fill-opacity linear;
+}
+
+.kontakti__socseti2:hover .kontakti__socseti2__hover{
+  fill-opacity: .3;
+  transition: .1s fill-opacity linear;
 }
 
 /* popup */
@@ -226,4 +248,24 @@
   padding: 12px 24px;
   margin-bottom: 0;
   text-align: center;
+}
+
+/* errors */
+
+.TextAreaMes__error{
+  border: none;
+  width: 92%;
+  height: 200px;
+  background: #F8F8F8;
+  border-radius: 30px;
+  padding: 15px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  border: 1px solid #EB5757;
+  margin-bottom: 40px;
+}
+
+.TextAreaMes__error:focus{
+  outline: 1px solid #EB5757;
 }

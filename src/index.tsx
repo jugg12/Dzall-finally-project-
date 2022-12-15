@@ -7,13 +7,8 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { BrowserRouter as Router} from "react-router-dom";
 import { Provider } from 'react-redux';
-import reducer, { initialState } from './store/reducer';
+import store from "./store/index"
 
-const store = createStore(
-  reducer,
-  initialState,
-  applyMiddleware(logger, thunk)
-)
 
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);

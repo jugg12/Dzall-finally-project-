@@ -1,0 +1,103 @@
+.CardOsnova{
+  width: 100%;
+}
+
+.TitleTextInnerKatalogSpiskom{
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  color: #1E2123;
+  margin-bottom: 17px;
+}
+
+.itemsCategories{
+  display: flex;
+}
+
+.metro2{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #686868;
+}
+
+
+
+.rayon2{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #686868;
+}
+.previousClass{
+  display: none;
+}
+
+.nextClass{
+  display: none;
+}
+
+.card__text2{
+  --max-lines: 3;
+}
+
+.kontaktibtn3::before{
+  top: 82.3%;
+  left:35.4%;
+  width: 9.3%;
+  height: 13%;
+}
+
+.Podrobneebtn3::before{
+  top: 82%;
+  right:1.5%;
+  width: 8.2%;
+  height: 13.1%;
+}
+
+.btnKontaktiHeart{
+  display: flex;
+}
+
+.textHeart{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #EB5757;
+}
+
+.heart2{
+  margin-left: 15px;
+  background: rgba(235, 87, 87, 0.1);
+  cursor: pointer;
+  border-radius: 22px;
+  padding: 0px 9px;
+  display: flex;
+  width: auto;
+  align-items: center;
+}
+
+.heart2:active{
+  background: rgba(235, 87, 87, 0.08);
+  box-shadow:1px 1px 2px rgba(0, 96, 206, 0.1) inset;
+  transition: .2s box-shadow linear ;
+}
+
+.heart2:hover .heart__svg{
+  fill: rgba(235, 87, 87, 0.4);
+}
+
+.heart2:hover .heart__svg.active{
+  fill: #EB5757
+}
+
+.heart__svg.active{
+  fill: #EB5757;
+}
+
+.heart2:active .heart__svg{
+  fill: rgba(235, 87, 87, 0.3);
+}
+
+
+

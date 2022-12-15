@@ -20,9 +20,6 @@ footer{
 
 /* pervaya chast' */
 
-.Logo{
-}
-
 .footer__inner__text{
   margin-top: 10px;
   text-transform: uppercase;
@@ -61,9 +58,16 @@ footer{
   margin-bottom: 21px;
   font-weight: 700;
   font-size: 14px;
+  scale: 1;
   line-height: 17px;
   color: #1E2123;
   text-decoration: none;
+  transition: .15s scale linear;
+}
+
+.info1__text:hover{
+  scale: 1.12;
+  transition: .15s scale linear;
 }
 
 .info1__text :last-child{
@@ -87,12 +91,20 @@ footer{
 }
 
 .info2__text{
+  cursor: pointer;
   margin-bottom: 8px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #8291A3;
+  scale: 1;
   text-decoration: none;
+  transition: .1s scale linear;
+}
+
+.info2__text:hover{
+  scale: 1.03;
+  transition: .1s scale linear;
 }
 
 .delenie1{
@@ -120,7 +132,14 @@ footer{
   font-size: 14px;
   line-height: 17px;
   color: #8291A3;
+  scale: 1;
+  transition: .1s scale linear;
   text-decoration: none;
+}
+
+.info3__text:hover{
+  scale: 1.05;
+  transition: .1s scale linear;
 }
 
 .info3__text:first-child{
@@ -158,6 +177,16 @@ footer{
 
 .socseti__icon:last-child{
   margin-right: 0 ;
+}
+
+.socseti__icon{
+  cursor: pointer;
+  transition: .2s fill linear;
+}
+
+.socseti__icon:hover .socseti__icon__hover{
+  fill: #664EF9;
+  transition: .2s fill linear;
 }
 
 /* payment */
